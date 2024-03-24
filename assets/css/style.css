@@ -15,10 +15,62 @@ body {
     font-weight: 600;
 }
 
+.inputLabel {
+    font-size: 1.5em;
+}
+
+.inputTarefa {
+    margin-block: 0.5em;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.input {
+    padding: 0.6em;
+    border-radius: 10px;
+    border: none;
+    font-size: 1em;
+}
+
 .buttonAdd {
     color: white;
     background-color: blue;
     border-radius: 5px;
     border: none;
-    padding: 0.5em, 1em;
+    padding: 1em;
+    margin-inline: 1em;
+}
+
+.buttonUpdate {
+    color: white;
+    background-color: red;
+    border-radius: 5px;
+    border: none;
+    margin-inline: 0.5em;
+}
+
+.icon {
+    height: 2.5em;
+    object-fit: fill;
+    overflow: hidden;
+}
+
+li {
+    font-size: 1.8em;
+}
+
+.checkbox {
+    height: 2em;
+    width: 2em;
+    margin-inline: 0.8em;
+}
+
+.hideTask {
+    display: flex;
+    font-size: 1.2em;
+}
+
+.hideCheckbox {
+    width: 1.6em;
 }

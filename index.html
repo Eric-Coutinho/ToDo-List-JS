@@ -19,11 +19,16 @@
         <div class="title">    
             <h2>Lista de Tarefas - Programação FrontEnd</h2>
         </div>
-        
-        <label for="input_nova_tarefa">Digite sua nova tarefa:</label>
-        <div id="div_area_nova_tarefa">
-            <input type="text" id="input_nova_tarefa">
+        <div class="inputLabel">
+            <label for="input_nova_tarefa">Digite sua nova tarefa:</label>
+        </div>
+        <div id="div_area_nova_tarefa" class="inputTarefa">
+            <input type="text" id="input_nova_tarefa" class="input">
             <button onclick="adicionaTarefaNaLista()" class="buttonAdd">+</button>
+        </div>
+        <div class="hideTask">
+            <p>Esconder tarefas já concluídas: </p>
+                <input type="checkbox" class="hideCheckbox" onchange="esconderTarefas()">
         </div>
         <div id="div_lista_de_tarefas">
             <ul id="lista_de_tarefas">
