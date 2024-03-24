@@ -1,7 +1,11 @@
 function adicionaTarefaNaLista() {
     const novaTarefa = document.getElementById('input_nova_tarefa').value;
-    criaNovoItemDaLista(novaTarefa);
-    document.getElementById('input_nova_tarefa').value = "";
+    if (novaTarefa.length < 1)
+        alert('Por favor insira as informações da tarefa.')
+    else {
+        criaNovoItemDaLista(novaTarefa);
+        document.getElementById('input_nova_tarefa').value = "";
+    }
 }
 
 function criaNovoItemDaLista(textoDaTarefa) {
