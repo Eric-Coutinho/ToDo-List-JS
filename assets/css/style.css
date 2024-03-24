@@ -1,0 +1,24 @@
+body {
+    background-color: gray;
+    font-family: "Montserrat", sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    color: white;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.buttonAdd {
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5em, 1em;
+}

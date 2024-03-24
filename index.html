@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Lista de Tarefas</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">    
+            <h2>Lista de Tarefas - Programação FrontEnd</h2>
+        </div>
+        
+        <label for="input_nova_tarefa">Digite sua nova tarefa:</label>
+        <div id="div_area_nova_tarefa">
+            <input type="text" id="input_nova_tarefa">
+            <button onclick="adicionaTarefaNaLista()" class="buttonAdd">+</button>
+        </div>
+        <div id="div_lista_de_tarefas">
+            <ul id="lista_de_tarefas">
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script src="assets/js/app.js"></script>
+
+</html>
