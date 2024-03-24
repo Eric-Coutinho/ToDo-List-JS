@@ -1,6 +1,7 @@
 function adicionaTarefaNaLista() {
     const novaTarefa = document.getElementById('input_nova_tarefa').value;
     criaNovoItemDaLista(novaTarefa);
+    document.getElementById('input_nova_tarefa').value = "";
 }
 
 function criaNovoItemDaLista(textoDaTarefa) {
@@ -34,26 +35,38 @@ function criaBotaoAtualizarTarefa(idTarefa) {
     const icon = document.createElement('img');
     icon.setAttribute('src', 'assets/img/pen.png');
     icon.setAttribute('class', 'icon');
-    
+
     buttonUpdate.appendChild(icon);
     return buttonUpdate;
 }
 
+var isHidden = false;
+
 function mudaEstadoTarefa(idTarefa) {
     const tarefaSelecionada = document.getElementById(idTarefa);
-    if (tarefaSelecionada.style.textDecoration == 'line-through') {
+
+    if (tarefaSelecionada.style.textDecoration == 'line-through')
         tarefaSelecionada.style = 'text-decoration: none;';
-    } else {
+
+    else {
         tarefaSelecionada.style = 'text-decoration: line-through;';
-    }    
+
+        if(isHidden == true)
+            tarefaSelecionada.style.display = 'none';
+    }
 }
 
-let isHidden = false;
-
 function escondeTarefa() {
+    console.log("isHidden:", isHidden)
     isHidden = !isHidden;
 
-    if(isHidden = true) {
-        
+    if (isHidden === true) {
+        let listaTarefas = document.getElementById('lista_de_tarefas');
+        for (let index = 0; index < listaTarefas.children.length; index++) {
+            let tarefa = document.getElementById(`tarefa_id_${index}`);
+
+            if (tarefa.style.textDecoration === 'line-through')
+                tarefa.style.display = 'none';
+        }
     }
 }
