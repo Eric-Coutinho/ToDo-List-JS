@@ -40,6 +40,15 @@ function criaBotaoAtualizarTarefa(idTarefa) {
     return buttonUpdate;
 }
 
+function updateTarefa(idTarefa) {
+    let tarefa = document.getElementById(idTarefa);
+    let newText = prompt("Qual a sua tarefa?:", tarefa.innerText);
+    tarefa.innerText = newText;
+    tarefa.appendChild(criaInputCheckBoxTarefa(idTarefa))
+    tarefa.appendChild(criaBotaoAtualizarTarefa(idTarefa))
+
+}
+
 var isHidden = false;
 
 function mudaEstadoTarefa(idTarefa) {
