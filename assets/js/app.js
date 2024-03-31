@@ -1,9 +1,14 @@
+let isHidden = false;
+let count = 0;
+
 function adicionaTarefaNaLista() {
     const novaTarefa = document.getElementById('input_nova_tarefa').value;
-    if (novaTarefa.length < 1)
-        alert('Por favor insira as informações da tarefa.')
+    if (novaTarefa.trim().length < 1)
+        alert('Não é possível criar uma tarefa vazia.')
     else {
         criaNovoItemDaLista(novaTarefa);
+        localStorage.setItem(`tarefa_id_${count}`, novaTarefa);
+        count++;
         document.getElementById('input_nova_tarefa').value = "";
     }
 }
@@ -15,7 +20,8 @@ function criaNovoItemDaLista(textoDaTarefa) {
     const novoItem = document.createElement('li');
 
     novoItem.innerText = textoDaTarefa;
-    novoItem.id = `tarefa_id_${qtdTarefas++}`;
+    novoItem.id = `tarefa_id_${qtdTarefas}`;
+    qtdTarefas++;
 
     novoItem.appendChild(criaInputCheckBoxTarefa(novoItem.id));
     novoItem.appendChild(criaBotaoAtualizarTarefa(novoItem.id));
@@ -46,14 +52,12 @@ function criaBotaoAtualizarTarefa(idTarefa) {
 
 function updateTarefa(idTarefa) {
     let tarefa = document.getElementById(idTarefa);
-    let newText = prompt("Qual a sua tarefa?:", tarefa.innerText);
+    let newText = prompt("Qual a sua tarefa?", tarefa.innerText);
     tarefa.innerText = newText;
     tarefa.appendChild(criaInputCheckBoxTarefa(idTarefa))
     tarefa.appendChild(criaBotaoAtualizarTarefa(idTarefa))
-
+    localStorage.setItem(idTarefa, newText);
 }
-
-var isHidden = false;
 
 function mudaEstadoTarefa(idTarefa) {
     const tarefaSelecionada = document.getElementById(idTarefa);
@@ -64,13 +68,12 @@ function mudaEstadoTarefa(idTarefa) {
     else {
         tarefaSelecionada.style = 'text-decoration: line-through;';
 
-        if(isHidden == true)
+        if (isHidden == true)
             tarefaSelecionada.style.display = 'none';
     }
 }
 
 function escondeTarefa() {
-    console.log("isHidden:", isHidden)
     isHidden = !isHidden;
 
     if (isHidden === true) {
@@ -80,6 +83,20 @@ function escondeTarefa() {
 
             if (tarefa.style.textDecoration === 'line-through')
                 tarefa.style.display = 'none';
+            else
+                tarefa.style.display = 'true';
         }
     }
 }
+
+function carregaTarefa() {
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = `tarefa_id_${i}`;
+        const tarefa = localStorage.getItem(key);
+        if (tarefa) {
+            criaNovoItemDaLista(tarefa);
+        }
+    }
+}
+
+window.onload = carregaTarefa;
