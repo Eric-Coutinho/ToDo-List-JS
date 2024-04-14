@@ -1,5 +1,4 @@
 let isHidden = localStorage.getItem('isHidden') === 'true'? true : false;
-
 let count = 0;
 
 function adicionaTarefaNaLista() {
@@ -23,6 +22,7 @@ function criaNovoItemDaLista(textoDaTarefa, state = false) {
     const novoItem = document.createElement('li');
 
     novoItem.innerText = textoDaTarefa;
+
     if(state == 'complete')
         novoItem.style.textDecoration = 'line-through';
 
@@ -40,6 +40,7 @@ function criaInputCheckBoxTarefa(idTarefa, state) {
     inputTarefa.type = 'checkbox';
     inputTarefa.setAttribute('onclick', `mudaEstadoTarefa('${idTarefa}')`);
     inputTarefa.setAttribute('class', 'checkbox');
+
     if(state == 'complete')
         inputTarefa.checked = true;
     return inputTarefa;
@@ -63,6 +64,7 @@ function updateTarefa(idTarefa, state = false) {
     
     let tarefa = document.getElementById(idTarefa);
     let newText = prompt("Qual a sua tarefa?", tarefa.innerText);
+
     if (newText == null || newText.trim.length < 1) {
         alert('Preencha as informações.');
         return;
@@ -128,6 +130,7 @@ function carregaTarefa() {
     let hidden = localStorage.getItem('isHidden');
 
     let hideCheckbox = document.getElementById('hideCheckbox');
+    
     if (hidden === "true") {
         hideCheckbox.checked = true;
     }
