@@ -15,7 +15,7 @@ function adicionaTarefaNaLista() {
     }
 }
 
-function criaNovoItemDaLista(textoDaTarefa, state = false) {
+function criaNovoItemDaLista(textoDaTarefa, state = 'incomplete') {
     const listaTarefas = document.getElementById('lista_de_tarefas');
     let qtdTarefas = listaTarefas.children.length;
 
@@ -59,7 +59,7 @@ function criaBotaoAtualizarTarefa(idTarefa) {
     return buttonUpdate;
 }
 
-function updateTarefa(idTarefa, state = false) {    
+function updateTarefa(idTarefa, state = 'incomplete') {    
     let tarefa = document.getElementById(idTarefa);
     let newText = prompt("Qual a sua tarefa?", tarefa.innerText);
 
