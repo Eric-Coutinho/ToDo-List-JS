@@ -59,29 +59,30 @@ function criaBotaoAtualizarTarefa(idTarefa) {
     return buttonUpdate;
 }
 
-function updateTarefa(idTarefa, state = false) {
-    state = localStorage.getItem(`stateTarefa_${idTarefa}`)
-    
+function updateTarefa(idTarefa, state = false) {    
     let tarefa = document.getElementById(idTarefa);
     let newText = prompt("Qual a sua tarefa?", tarefa.innerText);
 
-    if (newText == null || newText.trim.length < 1) {
+    if (newText.trim().length < 1) {
         alert('Preencha as informações.');
         return;
     }
-    tarefa.innerText = newText;
 
+    tarefa.innerText = newText;
+    tarefa.appendChild(criaInputCheckBoxTarefa(idTarefa, state))
+    tarefa.appendChild(criaBotaoAtualizarTarefa(idTarefa))
+    localStorage.setItem(`${idTarefa}`, newText);
+    localStorage.setItem(`stateTarefa_${idTarefa}`, state);
     const checkbox = tarefa.querySelector('.checkbox');
 
-    if (state == 'incomplete') {
+    if (state == 'complete') {
         tarefa.style.textDecoration = 'line-through';
         checkbox.checked = true;
     }
-
-    tarefa.appendChild(criaInputCheckBoxTarefa(idTarefa))
-    tarefa.appendChild(criaBotaoAtualizarTarefa(idTarefa))
-
-    localStorage.setItem(idTarefa, newText);
+    else {
+        tarefaSelecionada.style.textDecoration = 'none';
+        checkbox.checked = false;
+    }
 }
 
 function mudaEstadoTarefa(idTarefa) {
@@ -130,7 +131,7 @@ function carregaTarefa() {
     let hidden = localStorage.getItem('isHidden');
 
     let hideCheckbox = document.getElementById('hideCheckbox');
-    
+
     if (hidden === "true") {
         hideCheckbox.checked = true;
     }
