@@ -58,10 +58,23 @@ function criaBotaoAtualizarTarefa(idTarefa) {
     return buttonUpdate;
 }
 
-function updateTarefa(idTarefa) {
+function updateTarefa(idTarefa, state = false) {
+    state = localStorage.getItem(`stateTarefa_${idTarefa}`)
+    
     let tarefa = document.getElementById(idTarefa);
     let newText = prompt("Qual a sua tarefa?", tarefa.innerText);
+    if (newText == null || newText.trim.length < 1) {
+        alert('Preencha as informações.');
+        return;
+    }
     tarefa.innerText = newText;
+
+    const checkbox = tarefa.querySelector('.checkbox');
+
+    if (state == 'incomplete') {
+        tarefa.style.textDecoration = 'line-through';
+        checkbox.checked = true;
+    }
 
     tarefa.appendChild(criaInputCheckBoxTarefa(idTarefa))
     tarefa.appendChild(criaBotaoAtualizarTarefa(idTarefa))
@@ -118,7 +131,7 @@ function carregaTarefa() {
     if (hidden === "true") {
         hideCheckbox.checked = true;
     }
-    
+
     for (let i = 0; i < localStorage.length; i++) {
         const key = `tarefa_id_${i}`;
         const tarefa = localStorage.getItem(key);
