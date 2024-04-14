@@ -1,8 +1,11 @@
 let isHidden = false;
+localStorage.setItem('isHidden', isHidden);
+
 let count = 0;
 
 function adicionaTarefaNaLista() {
     const novaTarefa = document.getElementById('input_nova_tarefa').value;
+    
     if (novaTarefa.trim().length < 1)
         alert('Não é possível criar uma tarefa vazia.')
     else {
@@ -54,37 +57,47 @@ function updateTarefa(idTarefa) {
     let tarefa = document.getElementById(idTarefa);
     let newText = prompt("Qual a sua tarefa?", tarefa.innerText);
     tarefa.innerText = newText;
+
     tarefa.appendChild(criaInputCheckBoxTarefa(idTarefa))
     tarefa.appendChild(criaBotaoAtualizarTarefa(idTarefa))
+
     localStorage.setItem(idTarefa, newText);
 }
 
 function mudaEstadoTarefa(idTarefa) {
+    let hidden = localStorage.getItem('isHidden');
     const tarefaSelecionada = document.getElementById(idTarefa);
+    const checkbox = tarefaSelecionada.querySelector('.checkbox');
 
-    if (tarefaSelecionada.style.textDecoration == 'line-through')
-        tarefaSelecionada.style = 'text-decoration: none;';
+    if (checkbox.checked) {
+        tarefaSelecionada.style.textDecoration = 'line-through';
 
-    else {
-        tarefaSelecionada.style = 'text-decoration: line-through;';
-
-        if (isHidden == true)
+        if (hidden === "true")
             tarefaSelecionada.style.display = 'none';
+    } 
+    else {
+        tarefaSelecionada.style.textDecoration = 'none';
+        tarefaSelecionada.style.display = '';
     }
+
 }
 
 function escondeTarefa() {
     isHidden = !isHidden;
+    localStorage.setItem('isHidden', isHidden);
+    let hidden = localStorage.getItem('isHidden');
 
-    if (isHidden === true) {
-        let listaTarefas = document.getElementById('lista_de_tarefas');
-        for (let index = 0; index < listaTarefas.children.length; index++) {
-            let tarefa = document.getElementById(`tarefa_id_${index}`);
+    let listaTarefas = document.getElementById('lista_de_tarefas');
 
-            if (tarefa.style.textDecoration === 'line-through')
-                tarefa.style.display = 'none';
-            else
-                tarefa.style.display = 'true';
+    for (let index = 0; index < listaTarefas.children.length; index++) {
+        let tarefa = document.getElementById(`tarefa_id_${index}`);
+        let checkbox = tarefa.querySelector('.checkbox');
+
+        if (hidden === "true" && (checkbox.checked || tarefa.style.textDecoration === 'line-through')) {
+            tarefa.style.display = 'none';
+        } 
+        else {
+            tarefa.style.display = '';
         }
     }
 }
@@ -93,9 +106,9 @@ function carregaTarefa() {
     for (let i = 0; i < localStorage.length; i++) {
         const key = `tarefa_id_${i}`;
         const tarefa = localStorage.getItem(key);
-        if (tarefa) {
+
+        if (tarefa) 
             criaNovoItemDaLista(tarefa);
-        }
     }
 }
 
